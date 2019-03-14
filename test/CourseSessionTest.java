@@ -1,6 +1,8 @@
-import static org.junit.Assert.*;
-import java.util.ArrayList;
-import java.util.Date;
+//import static org.junit.Assert.*;
+//import java.util.ArrayList;
+//import java.util.Date;
+//import java.util.GregorianCalendar;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -13,10 +15,7 @@ public class CourseSessionTest extends junit.framework.TestCase{
 //		
 //	}
 	public void setUp() {
-		int year = 103;
-		int month = 0;
-		int date = 6;
-		startDate = new Date(year, month, date);
+		startDate = createDate(2003, 1, 6);
 		session = new CourseSession("ENGL", "101", startDate);
 	}
 	
@@ -27,6 +26,18 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(startDate, session.getStartDate());		
 	}
 	
+	Date createDate(int year, int month, int date) {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.clear();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month - 1);
+		calendar.set(Calendar.DAY_OF_MONTH, date);
+		return calendar.getTime();
+	}
+	public void testCourseDates() {
+		Date sixteenWeeksOut = createDate(2003, 4, 25);
+		assertEquals(sixteenWeeksOut, session.getEndDate());
+	}
 	//등록했을 상황을 추가한다. 
 	public void testEnrollStudents() {
 		Student student1 = new Student("Cain DiVoe");
@@ -39,13 +50,5 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(2, session.getNumberOfStudents());
 		assertEquals(student1, session.get(0));
 		assertEquals(student2, session.get(1));
-	}
-	
-	public void testCourseDates() {
-		int year = 103;
-		int month = 3;
-		int date = 25;
-		Date sixteemWeelsOut = new Date(year, month, date);
-		assertEquals(sixteemWeelsOut, session.getEndDate());
-	}
+	}	
 }

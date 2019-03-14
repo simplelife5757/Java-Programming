@@ -1,13 +1,18 @@
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+//import java.util.ArrayList;
+//import java.util.Calendar;
+//import java.util.Date;
+//import java.util.GregorianCalendar;
+import java.util.*; //패키지 임포트
 
 public class CourseSession {
 	private String department;
 	private String number;
 	private ArrayList<Student> students = new ArrayList<Student>();
 	private Date startDate;
+	final int daysFromFridayToMonday = 3;
+	final int daysInWeek = 7;
+	final int seessionLength = 16;
+	int numberOfDays = seessionLength * daysInWeek - daysFromFridayToMonday;
 
 	public CourseSession(String department, String number, Date startDate) {
 		this.department = department;
@@ -40,10 +45,8 @@ public class CourseSession {
 	Date getEndDate() {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTime(startDate);
-		int numberOfDays = 16 * 7 - 3;
 		calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-		Date endDate = calendar.getTime();
-		return endDate;
+		return calendar.getTime();
 	}
 
 	Date getStartDate() {
