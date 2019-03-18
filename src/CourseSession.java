@@ -5,10 +5,13 @@
 import java.util.*; //패키지 임포트
 
 public class CourseSession {
+	static final String NEWLINE = System.getProperty("line.separator");
+	static final String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
+	static final String ROSTER_REPORT_FOOTER = NEWLINE + "# students = ";
 	private String department;
 	private String number;
-	private ArrayList<Student> students = new ArrayList<Student>();
 	private Date startDate;
+	private ArrayList<Student> students = new ArrayList<Student>();
 	final int daysFromFridayToMonday = 3;
 	final int daysInWeek = 7;
 	final int seessionLength = 16;
@@ -51,6 +54,24 @@ public class CourseSession {
 
 	Date getStartDate() {
 		return startDate;
+	}
+
+	String getRosterReport() {
+		StringBuilder buffer = new StringBuilder();
+		
+		buffer.append(ROSTER_REPORT_HEADER);
+		
+		Student student = students.get(0);
+		buffer.append(student.getName());
+		buffer.append(NEWLINE);
+
+		student = students.get(1);
+		buffer.append(student.getName());
+		buffer.append(NEWLINE);
+		
+		buffer.append(ROSTER_REPORT_FOOTER + students.size() + NEWLINE);
+		
+		return buffer.toString();
 	}
 	
 }
