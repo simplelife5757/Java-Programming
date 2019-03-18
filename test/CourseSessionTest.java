@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.junit.Test;
 
+//CourseSession클래스에서 꼭 다루어야 하는 목표는 강의에 대한 모든 정보를 추적하는 것 
 public class CourseSessionTest extends junit.framework.TestCase{
 	private CourseSession session;
 	private Date startDate;
@@ -15,10 +16,11 @@ public class CourseSessionTest extends junit.framework.TestCase{
 //		
 //	}
 	public void setUp() {
-		startDate = createDate(2003, 1, 6);
+		startDate = new DateUtil().createDate(2003, 1, 6);
 		session = new CourseSession("ENGL", "101", startDate);
 	}
 	
+	//코스의 정보에 관한 것에 대한 테스트 
 	public void testCreate() {
 		assertEquals("ENGL", session.getDepartment());
 		assertEquals("101", session.getNumber());
@@ -26,16 +28,10 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(startDate, session.getStartDate());		
 	}
 	
-	Date createDate(int year, int month, int date) {
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.clear();
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, month - 1);
-		calendar.set(Calendar.DAY_OF_MONTH, date);
-		return calendar.getTime();
-	}
+	//코스의 날짜에 대한 정보에 대한 테스트 
+	
 	public void testCourseDates() {
-		Date sixteenWeeksOut = createDate(2003, 4, 25);
+		Date sixteenWeeksOut = new DateUtil().createDate(2003, 4, 25);
 		assertEquals(sixteenWeeksOut, session.getEndDate());
 	}
 	//등록했을 상황을 추가한다. 
@@ -51,16 +47,6 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(student1, session.get(0));
 		assertEquals(student2, session.get(1));
 	}	
-	public void testRosterReport() {
-		session.enroll(new Student("A"));
-		session.enroll(new Student("B"));
-		
-		String rosterReport = session.getRosterReport();
-		assertEquals(
-				CourseSession.ROSTER_REPORT_HEADER +
-				"A" + CourseSession.NEWLINE +
-				"B" + CourseSession.NEWLINE +
-				CourseSession.ROSTER_REPORT_FOOTER + "2" +
-				CourseSession.NEWLINE, rosterReport);
-	}
+	
+	
 }
