@@ -1,3 +1,5 @@
+package sis.studentinfo;
+
 //import static org.junit.Assert.*;
 //import java.util.ArrayList;
 //import java.util.Date;
@@ -16,8 +18,8 @@ public class CourseSessionTest extends junit.framework.TestCase{
 //		
 //	}
 	public void setUp() {
-		startDate = new DateUtil().createDate(2003, 1, 6);
-		session = new CourseSession("ENGL", "101", startDate);
+		startDate = DateUtil.createDate(2003, 1, 6);
+		session = createCourseSession();
 	}
 	
 	//코스의 정보에 관한 것에 대한 테스트 
@@ -31,7 +33,7 @@ public class CourseSessionTest extends junit.framework.TestCase{
 	//코스의 날짜에 대한 정보에 대한 테스트 
 	
 	public void testCourseDates() {
-		Date sixteenWeeksOut = new DateUtil().createDate(2003, 4, 25);
+		Date sixteenWeeksOut = DateUtil.createDate(2003, 4, 25);
 		assertEquals(sixteenWeeksOut, session.getEndDate());
 	}
 	//등록했을 상황을 추가한다. 
@@ -48,5 +50,15 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(student2, session.get(1));
 	}	
 	
-	
+	public void testCount() {
+		CourseSession.resetCount();
+		createCourseSession(); //객체를 찍어내는 것도 메소드로 만들기. 
+//		assertEquals(1, CourseSession.count); 직접 변수를 보이는 것은 좋지 않다.  
+		assertEquals(1, CourseSession.getCount()); 
+		createCourseSession();
+		assertEquals(2, CourseSession.getCount());
+	}
+	private CourseSession createCourseSession() {
+		return CourseSession.create("ENGL", "101", startDate);
+	}
 }

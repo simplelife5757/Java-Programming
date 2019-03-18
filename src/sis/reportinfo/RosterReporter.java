@@ -1,4 +1,6 @@
+package sis.reportinfo;
 import java.util.*;
+import sis.studentinfo.*;
 
 public class RosterReporter {
 	public static final String NEWLINE = 

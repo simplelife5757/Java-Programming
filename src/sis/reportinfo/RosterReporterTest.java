@@ -1,10 +1,12 @@
+package sis.reportinfo;
 import junit.framework.TestCase;
 import java.util.*;
+import sis.studentinfo.*;
 
 //학생이 추가 되었을 때 리포트가 잘 나오는지 획인 하는 클래스 
 public class RosterReporterTest extends TestCase {
 	public void testRosterReport() {
-	CourseSession session = new CourseSession("ENGL", "101", new DateUtil().createDate(2003, 1, 6));
+	CourseSession session = CourseSession.create("ENGL", "101", DateUtil.createDate(2003, 1, 6));
 	
 	session.enroll(new Student("A"));
 	session.enroll(new Student("B"));

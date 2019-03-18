@@ -1,3 +1,4 @@
+package sis.studentinfo;
 	
 public class Student {
 	private String name; //변수를 필드라고도 부른다. private은 외부에서 직접 변수를 못건드리게 한다. 

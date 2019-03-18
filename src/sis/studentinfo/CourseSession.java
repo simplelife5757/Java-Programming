@@ -1,3 +1,4 @@
+package sis.studentinfo;
 //import java.util.ArrayList;
 //import java.util.Calendar;
 //import java.util.Date;
@@ -5,6 +6,7 @@
 import java.util.*; //패키지 임포트
 
 public class CourseSession {
+	private static int count;
 	static final String NEWLINE = System.getProperty("line.separator");
 	static final String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
 	static final String ROSTER_REPORT_FOOTER = NEWLINE + "# students = ";
@@ -17,12 +19,24 @@ public class CourseSession {
 	final int seessionLength = 16;
 	int numberOfDays = seessionLength * daysInWeek - daysFromFridayToMonday;
 
-	public CourseSession(String department, String number, Date startDate) {
+	private CourseSession(String department, String number, Date startDate) {
 		this.department = department;
 		this.number = number;
 		this.startDate = startDate;
 	}
-
+	//private로 선언하여 다른 클래스에서 카운터를 올리는 것을 막는다. 
+	private static void incremetCount() {
+		++count;
+	}
+	//factory method 
+	public static CourseSession create(String department, String number, Date startDate) {
+		incremetCount();
+		return new CourseSession(department, number, startDate);
+	}
+	
+	static void resetCount() {
+		count = 0;
+	}
 	String getDepartment() {
 		return department;
 	}
@@ -37,7 +51,7 @@ public class CourseSession {
 		return students.size();
 	}
 
-	void enroll(Student student) {
+	public void enroll(Student student) {
 		students.add(student);
 	}
 	
@@ -56,8 +70,14 @@ public class CourseSession {
 		return startDate;
 	}
 
-	ArrayList<Student> getAllStudents(){
+	public ArrayList<Student> getAllStudents(){
 		return students;
 	}
+
+	static int getCount() {
+		return count;
+	}
+
+	
 	
 }

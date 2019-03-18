@@ -1,5 +1,5 @@
+package sis.studentinfo;
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class StudentTest extends junit.framework.TestCase{

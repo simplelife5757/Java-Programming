@@ -1,9 +1,11 @@
+package sis.studentinfo;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateUtil {
-	Date createDate(int year, int month, int date) {
+	private DateUtil() {} // 객체를 생성하는 것을 허용하지 않는 것이 좀 더 좋다. 
+	public static Date createDate(int year, int month, int date) {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.clear();
 		calendar.set(Calendar.YEAR, year);
