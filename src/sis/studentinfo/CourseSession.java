@@ -18,6 +18,7 @@ public class CourseSession {
 	final int daysInWeek = 7;
 	final int seessionLength = 16;
 	int numberOfDays = seessionLength * daysInWeek - daysFromFridayToMonday;
+	private int numberOfCredits;
 
 	private CourseSession(String department, String number, Date startDate) {
 		this.department = department;
@@ -52,6 +53,7 @@ public class CourseSession {
 	}
 
 	public void enroll(Student student) {
+		student.addCredits(numberOfCredits);
 		students.add(student);
 	}
 	
@@ -76,6 +78,9 @@ public class CourseSession {
 
 	static int getCount() {
 		return count;
+	}
+	void setNumberOfCredits(int numberOfCredits) {
+		this.numberOfCredits = numberOfCredits;
 	}
 
 	

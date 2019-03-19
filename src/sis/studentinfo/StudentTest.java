@@ -17,6 +17,25 @@ public class StudentTest extends junit.framework.TestCase{
 		assertEquals(secondStudentName, secondStudent.getName()); //secondStudent.name 으로 접근하는게 객체지향 (x)
 		
 		// 객체 지향 = 새로운 객체 생성, 다른 객체로 메세지를 보내거나, 객체 레퍼런스에(new를 통해 생성되거나 메시지 전송을 통해 얻은 )객체의 주소를 할당하는 것.
+		
+	}
+	
+	public void testStudentStatus() {
+		Student student = new Student("a");
+		assertEquals(0, student.getCredits());
+		assertFalse(student.isFullTime());
+		
+		student.addCredits(3);
+		assertEquals(3, student.getCredits());
+		assertFalse(student.isFullTime());
+		
+		student.addCredits(4);
+		assertEquals(7, student.getCredits());
+		assertFalse("not enough credits for FT status", student.isFullTime());
 
+		student.addCredits(5);
+		assertEquals(12, student.getCredits());
+		assertTrue("not enough credits for FT status", student.isFullTime());
+		
 	}
 }

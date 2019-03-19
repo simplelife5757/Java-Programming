@@ -10,6 +10,7 @@ import org.junit.Test;
 
 //CourseSession클래스에서 꼭 다루어야 하는 목표는 강의에 대한 모든 정보를 추적하는 것 
 public class CourseSessionTest extends junit.framework.TestCase{
+	private static final int CREDITS = 3;
 	private CourseSession session;
 	private Date startDate;
 	//클래스에서 생성자를 정의 하지 않으면 기본적으로 인수를 가지지 않는 생성자를 제공한다.
@@ -40,11 +41,13 @@ public class CourseSessionTest extends junit.framework.TestCase{
 	public void testEnrollStudents() {
 		Student student1 = new Student("Cain DiVoe");
 		session.enroll(student1);
+		assertEquals(CREDITS, student1.getCredits());
 		assertEquals(1, session.getNumberOfStudents());
 		assertEquals(student1, session.get(0));
 		
 		Student student2 = new Student("Coralee DeVaughn");
 		session.enroll(student2);
+		assertEquals(CREDITS, student1.getCredits());
 		assertEquals(2, session.getNumberOfStudents());
 		assertEquals(student1, session.get(0));
 		assertEquals(student2, session.get(1));
@@ -59,6 +62,8 @@ public class CourseSessionTest extends junit.framework.TestCase{
 		assertEquals(2, CourseSession.getCount());
 	}
 	private CourseSession createCourseSession() {
-		return CourseSession.create("ENGL", "101", startDate);
+		CourseSession session = CourseSession.create("ENGL", "101", startDate);
+		session.setNumberOfCredits(CourseSessionTest.CREDITS);
+		return session;
 	}
 }
