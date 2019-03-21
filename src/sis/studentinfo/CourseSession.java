@@ -5,7 +5,7 @@ package sis.studentinfo;
 //import java.util.GregorianCalendar;
 import java.util.*; //패키지 임포트
 
-public class CourseSession {
+public class CourseSession implements Comparable<CourseSession>{
 	private static int count;
 	static final String NEWLINE = System.getProperty("line.separator");
 	static final String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
@@ -38,11 +38,11 @@ public class CourseSession {
 	static void resetCount() {
 		count = 0;
 	}
-	String getDepartment() {
+	public String getDepartment() {
 		return department;
 	}
 
-	String getNumber() {
+	public String getNumber() {
 		return number;
 	}
 	// Student 클래스나 CourseSession 클래스 모두 다른 객체에서 데이터를 가져가기 메소드를 제공한다. 이건 객체 지향이 아니고
@@ -83,6 +83,12 @@ public class CourseSession {
 		this.numberOfCredits = numberOfCredits;
 	}
 
+	public int compareTo(CourseSession that) {
+		int compare = this.getDepartment().compareTo(that.getDepartment());
+		if (compare == 0)
+			compare = this.getNumber().compareTo(that.getNumber());
+		return compare;
+	}
 	
 	
 }
