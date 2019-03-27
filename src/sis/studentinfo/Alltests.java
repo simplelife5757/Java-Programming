@@ -8,6 +8,8 @@ public class Alltests extends junit.framework.TestCase {
 		suite.addTestSuite(CourseSessionTest.class);
 //		suite.addTestSuite(RosterReporterTest.class);
 		suite.addTestSuite(DateUtilTest.class);
+		suite.addTestSuite(HonorsGradingStrategyTest.class);
+		suite.addTestSuite(BasicGradingStrategyTest.class);
 		return suite;
 	}
 }
